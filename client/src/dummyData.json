@@ -1,0 +1,92 @@
+{
+  "farmerMetrics": {
+    "totalRevenue": 156000,
+    "activeListings": 8,
+    "completedOrders": 45,
+    "monthlyRevenue": [
+      { "month": "Jan", "amount": 12000 },
+      { "month": "Feb", "amount": 15000 },
+      { "month": "Mar", "amount": 18000 },
+      { "month": "Apr", "amount": 14000 },
+      { "month": "May", "amount": 16000 },
+      { "month": "Jun", "amount": 22000 }
+    ],
+    "topProducts": [
+      { "name": "Organic Tomatoes", "quantity": 500, "revenue": 25000 },
+      { "name": "Fresh Potatoes", "quantity": 800, "revenue": 32000 },
+      { "name": "Green Peas", "quantity": 300, "revenue": 15000 },
+      { "name": "Onions", "quantity": 600, "revenue": 18000 }
+    ],
+    "recentOrders": [
+      {
+        "id": "ORD001",
+        "product": "Organic Tomatoes",
+        "buyer": "Fresh Mart",
+        "amount": 5000,
+        "status": "Delivered",
+        "date": "2024-03-15"
+      },
+      {
+        "id": "ORD002",
+        "product": "Potatoes",
+        "buyer": "GreenGrocer",
+        "amount": 8000,
+        "status": "In Transit",
+        "date": "2024-03-14"
+      },
+      {
+        "id": "ORD003",
+        "product": "Green Peas",
+        "buyer": "VegieStore",
+        "amount": 3000,
+        "status": "Processing",
+        "date": "2024-03-13"
+      }
+    ]
+  },
+  "buyerMetrics": {
+    "totalSpent": 245000,
+    "activeOrders": 5,
+    "completedOrders": 38,
+    "monthlySpending": [
+      { "month": "Jan", "amount": 35000 },
+      { "month": "Feb", "amount": 42000 },
+      { "month": "Mar", "amount": 38000 },
+      { "month": "Apr", "amount": 45000 },
+      { "month": "May", "amount": 40000 },
+      { "month": "Jun", "amount": 45000 }
+    ],
+    "topPurchases": [
+      { "name": "Organic Tomatoes", "quantity": 1200, "spent": 60000 },
+      { "name": "Fresh Potatoes", "quantity": 1500, "spent": 45000 },
+      { "name": "Onions", "quantity": 1000, "spent": 35000 },
+      { "name": "Carrots", "quantity": 800, "spent": 28000 }
+    ],
+    "recentOrders": [
+      {
+        "id": "ORD004",
+        "product": "Mixed Vegetables",
+        "seller": "Green Farms",
+        "amount": 12000,
+        "status": "Delivered",
+        "date": "2024-03-15"
+      },
+      {
+        "id": "ORD005",
+        "product": "Organic Tomatoes",
+        "seller": "Organic Valley",
+        "amount": 8500,
+        "status": "In Transit",
+        "date": "2024-03-14"
+      },
+      {
+        "id": "ORD006",
+        "product": "Fresh Potatoes",
+        "seller": "Farm Fresh",
+        "amount": 6500,
+        "status": "Processing",
+        "date": "2024-03-13"
+      }
+    ]
+  }
+} 
