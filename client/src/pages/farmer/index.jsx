@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { toast } from 'react-hot-toast';
 import {
   AreaChart,
   Area,
@@ -18,6 +19,7 @@ import {
   TrendingUpIcon,
   TrendingDownIcon
 } from '@heroicons/react/outline';
+import { Link } from 'react-router-dom';
 
 import dummyData from '../../dummyData.json';
 
@@ -29,6 +31,7 @@ const FarmerDashboard = () => {
     // Simulate API call with dummy data
     setTimeout(() => {
       setMetrics(dummyData.farmerMetrics);
+      toast.success('Dashboard data loaded successfully');
     }, 1000);
   }, []);
 
@@ -174,6 +177,16 @@ const FarmerDashboard = () => {
             </tbody>
           </table>
         </div>
+      </div>
+
+      <div className="sidebar">
+        <h2 className="text-lg font-bold">Farmer's Market</h2>
+        <ul>
+          <li><Link to="/farmer-dashboard">Dashboard</Link></li>
+          <li><Link to="/farmer/stock">Stock Information</Link></li>
+          <li><Link to="/farmer/analytics">Analytics</Link></li>
+          <li><Link to="/farmer/transactions">Transactions</Link></li>
+        </ul>
       </div>
     </div>
   );

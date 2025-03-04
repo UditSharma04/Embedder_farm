@@ -31,7 +31,86 @@ const BuyerOrders = () => {
       location: "Haryana",
       available: true
     },
-    // Add more dummy data as needed
+    {
+      id: 3,
+      farmerName: "Sunil Verma",
+      phone: "+91 9876543212",
+      stubbleType: "Bajra Stubble",
+      quantity: 400,
+      pricePerUnit: 150,
+      location: "UP",
+      available: true
+    },
+    {
+      id: 4,
+      farmerName: "Anil Sharma",
+      phone: "+91 9876543213",
+      stubbleType: "Barley Stubble",
+      quantity: 600,
+      pricePerUnit: 220,
+      location: "Punjab",
+      available: true
+    },
+    {
+      id: 5,
+      farmerName: "Ravi Gupta",
+      phone: "+91 9876543214",
+      stubbleType: "Wheat Stubble",
+      quantity: 700,
+      pricePerUnit: 200,
+      location: "Haryana",
+      available: true
+    },
+    {
+      id: 6,
+      farmerName: "Karan Mehta",
+      phone: "+91 9876543215",
+      stubbleType: "Rice Stubble",
+      quantity: 800,
+      pricePerUnit: 180,
+      location: "UP",
+      available: true
+    },
+    {
+      id: 7,
+      farmerName: "Vikram Singh",
+      phone: "+91 9876543216",
+      stubbleType: "Bajra Stubble",
+      quantity: 300,
+      pricePerUnit: 150,
+      location: "Punjab",
+      available: true
+    },
+    {
+      id: 8,
+      farmerName: "Deepak Kumar",
+      phone: "+91 9876543217",
+      stubbleType: "Barley Stubble",
+      quantity: 400,
+      pricePerUnit: 220,
+      location: "Haryana",
+      available: true
+    },
+    {
+      id: 9,
+      farmerName: "Suresh Yadav",
+      phone: "+91 9876543218",
+      stubbleType: "Wheat Stubble",
+      quantity: 500,
+      pricePerUnit: 200,
+      location: "UP",
+      available: true
+    },
+    {
+      id: 10,
+      farmerName: "Ajay Sharma",
+      phone: "+91 9876543219",
+      stubbleType: "Rice Stubble",
+      quantity: 600,
+      pricePerUnit: 180,
+      location: "Punjab",
+      available: true
+    }
   ]);
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [searchTerm, setSearchTerm] = useState('');
@@ -46,7 +125,7 @@ const BuyerOrders = () => {
   });
 
   // Filter options
-  const stubbleTypes = ['Wheat Stubble', 'Rice Stubble', 'Corn Stubble'];
+  const stubbleTypes = ['Wheat Stubble', 'Rice Stubble', 'Bajra Stubble', 'Barley Stubble'];
   const locations = ['Punjab', 'Haryana', 'UP'];
 
   // Handle search
@@ -105,9 +184,9 @@ const BuyerOrders = () => {
   };
 
   // Handle order
-  const handleOrder = (product) => {
+  const handleOrder = () => {
     // Add order logic here
-    toast.success(`Order placed for ${product.stubbleType} from ${product.farmerName}`);
+    toast.success(`Order placed for ${orderQuantity} kg of ${orderStubbleType}`);
   };
 
   return (
@@ -184,9 +263,7 @@ const BuyerOrders = () => {
                 product.available 
                   ? 'bg-green-100 text-green-800' 
                   : 'bg-red-100 text-red-800'
-              }`}>
-                {product.available ? 'Available' : 'Unavailable'}
-              </span>
+              }`}>{product.available ? 'Available' : 'Unavailable'}</span>
             </div>
 
             <div className="mt-4 space-y-2">

@@ -33,6 +33,12 @@ const Sidebar = () => {
       color: 'text-blue-600'
     },
     {
+      title: 'Profile',
+      icon: UserIcon,
+      path: '/profile',
+      color: 'text-purple-600'
+    },
+    {
       title: 'Analytics',
       icon: ChartBarIcon,
       path: isBuyer ? "/buyer-dashboard/analytics" : "/farmer-dashboard/analytics",
@@ -50,18 +56,6 @@ const Sidebar = () => {
       path: isBuyer ? "/buyer-dashboard/transactions" : "/farmer-dashboard/transactions",
       color: 'text-yellow-600'
     },
-    {
-      title: 'Performance',
-      icon: TrendingUpIcon,
-      path: isBuyer ? "/buyer-dashboard/performance" : "/farmer-dashboard/performance",
-      color: 'text-pink-600'
-    },
-    {
-      title: 'Settings',
-      icon: CogIcon,
-      path: '/settings',
-      color: 'text-gray-600'
-    }
   ];
 
   const handleLogout = () => {
@@ -110,35 +104,16 @@ const Sidebar = () => {
         </ul>
       </nav>
 
-      {/* Bottom Section with Profile and Logout */}
-      <div className="mt-auto">
-        {/* Horizontal line */}
-        <div className="border-t border-gray-200">
-          {/* Profile Link */}
-          <Link
-            to="/profile"
-            className={`flex items-center px-6 py-3 transition-colors duration-150 ease-in-out
-              ${isActiveRoute('/profile')
-                ? 'bg-green-50 text-green-600'
-                : 'hover:bg-gray-50'
-              }`}
-          >
-            <UserIcon className="h-5 w-5 text-purple-600" />
-            <span className="ml-3 text-sm font-medium">Profile</span>
-          </Link>
-        </div>
-
-        {/* Logout Button */}
-        <div className="p-4 border-t border-gray-200">
-          <button
-            onClick={handleLogout}
-            className="flex w-full items-center px-3 py-2 rounded-lg text-red-600 hover:bg-red-50 transition-colors duration-150 ease-in-out"
-          >
-            <LogoutIcon className="h-5 w-5" />
-            <span className="ml-3 text-sm font-medium">Logout</span>
-          </button>
-          <p className="text-xs text-gray-500 text-center mt-4">© 2024 Farmer's Market</p>
-        </div>
+      {/* Logout Button */}
+      <div className="p-4 border-t border-gray-200">
+        <button
+          onClick={handleLogout}
+          className="flex w-full items-center px-3 py-2 rounded-lg text-red-600 hover:bg-red-50 transition-colors duration-150 ease-in-out"
+        >
+          <LogoutIcon className="h-5 w-5" />
+          <span className="ml-3 text-sm font-medium">Logout</span>
+        </button>
+        <p className="text-xs text-gray-500 text-center mt-4">© 2024 Farmer's Market</p>
       </div>
     </div>
   );

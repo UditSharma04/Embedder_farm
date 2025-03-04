@@ -1,89 +1,113 @@
 {
   "farmerMetrics": {
-    "totalRevenue": 156000,
-    "activeListings": 8,
-    "completedOrders": 45,
+    "totalRevenue": 250000,
+    "activeListings": 15,
+    "completedOrders": 70,
     "monthlyRevenue": [
-      { "month": "Jan", "amount": 12000 },
-      { "month": "Feb", "amount": 15000 },
-      { "month": "Mar", "amount": 18000 },
-      { "month": "Apr", "amount": 14000 },
-      { "month": "May", "amount": 16000 },
-      { "month": "Jun", "amount": 22000 }
+      { "month": "Jan", "amount": 20000 },
+      { "month": "Feb", "amount": 25000 },
+      { "month": "Mar", "amount": 30000 },
+      { "month": "Apr", "amount": 22000 },
+      { "month": "May", "amount": 28000 },
+      { "month": "Jun", "amount": 35000 }
     ],
     "topProducts": [
-      { "name": "Organic Tomatoes", "quantity": 500, "revenue": 25000 },
-      { "name": "Fresh Potatoes", "quantity": 800, "revenue": 32000 },
-      { "name": "Green Peas", "quantity": 300, "revenue": 15000 },
-      { "name": "Onions", "quantity": 600, "revenue": 18000 }
+      { "name": "Wheat Stubble", "quantity": 1200, "revenue": 60000 },
+      { "name": "Rice Stubble", "quantity": 800, "revenue": 40000 },
+      { "name": "Bajra Stubble", "quantity": 600, "revenue": 30000 },
+      { "name": "Barley Stubble", "quantity": 500, "revenue": 25000 }
     ],
     "recentOrders": [
       {
         "id": "ORD001",
-        "product": "Organic Tomatoes",
-        "buyer": "Fresh Mart",
-        "amount": 5000,
+        "product": "Wheat Stubble",
+        "buyer": "Retailer A",
+        "amount": 15000,
         "status": "Delivered",
         "date": "2024-03-15"
       },
       {
         "id": "ORD002",
-        "product": "Potatoes",
-        "buyer": "GreenGrocer",
-        "amount": 8000,
+        "product": "Rice Stubble",
+        "buyer": "Retailer B",
+        "amount": 20000,
         "status": "In Transit",
         "date": "2024-03-14"
       },
       {
         "id": "ORD003",
-        "product": "Green Peas",
-        "buyer": "VegieStore",
-        "amount": 3000,
+        "product": "Bajra Stubble",
+        "buyer": "Retailer C",
+        "amount": 12000,
         "status": "Processing",
         "date": "2024-03-13"
+      },
+      {
+        "id": "ORD007",
+        "product": "Barley Stubble",
+        "buyer": "Retailer D",
+        "amount": 18000,
+        "status": "Delivered",
+        "date": "2024-03-12"
+      },
+      {
+        "id": "ORD008",
+        "product": "Wheat Stubble",
+        "buyer": "Retailer E",
+        "amount": 22000,
+        "status": "In Transit",
+        "date": "2024-03-11"
+      },
+      {
+        "id": "ORD009",
+        "product": "Rice Stubble",
+        "buyer": "Retailer F",
+        "amount": 16000,
+        "status": "Processing",
+        "date": "2024-03-10"
       }
     ]
   },
   "buyerMetrics": {
-    "totalSpent": 245000,
-    "activeOrders": 5,
-    "completedOrders": 38,
+    "totalSpent": 400000,
+    "activeOrders": 10,
+    "completedOrders": 60,
     "monthlySpending": [
-      { "month": "Jan", "amount": 35000 },
-      { "month": "Feb", "amount": 42000 },
-      { "month": "Mar", "amount": 38000 },
-      { "month": "Apr", "amount": 45000 },
-      { "month": "May", "amount": 40000 },
-      { "month": "Jun", "amount": 45000 }
+      { "month": "Jan", "amount": 50000 },
+      { "month": "Feb", "amount": 60000 },
+      { "month": "Mar", "amount": 55000 },
+      { "month": "Apr", "amount": 58000 },
+      { "month": "May", "amount": 62000 },
+      { "month": "Jun", "amount": 70000 }
     ],
     "topPurchases": [
-      { "name": "Organic Tomatoes", "quantity": 1200, "spent": 60000 },
-      { "name": "Fresh Potatoes", "quantity": 1500, "spent": 45000 },
-      { "name": "Onions", "quantity": 1000, "spent": 35000 },
-      { "name": "Carrots", "quantity": 800, "spent": 28000 }
+      { "name": "Wheat Stubble", "quantity": 2000, "spent": 100000 },
+      { "name": "Rice Stubble", "quantity": 1500, "spent": 75000 },
+      { "name": "Bajra Stubble", "quantity": 1000, "spent": 50000 },
+      { "name": "Barley Stubble", "quantity": 800, "spent": 40000 }
     ],
     "recentOrders": [
       {
         "id": "ORD004",
-        "product": "Mixed Vegetables",
-        "seller": "Green Farms",
-        "amount": 12000,
+        "product": "Wheat Stubble",
+        "seller": "Farmer A",
+        "amount": 20000,
         "status": "Delivered",
         "date": "2024-03-15"
       },
       {
         "id": "ORD005",
-        "product": "Organic Tomatoes",
-        "seller": "Organic Valley",
-        "amount": 8500,
+        "product": "Rice Stubble",
+        "seller": "Farmer B",
+        "amount": 15000,
         "status": "In Transit",
         "date": "2024-03-14"
       },
       {
         "id": "ORD006",
-        "product": "Fresh Potatoes",
-        "seller": "Farm Fresh",
-        "amount": 6500,
+        "product": "Bajra Stubble",
+        "seller": "Farmer C",
+        "amount": 10000,
         "status": "Processing",
         "date": "2024-03-13"
       }

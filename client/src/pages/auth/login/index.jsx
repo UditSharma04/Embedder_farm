@@ -14,6 +14,7 @@ const Login = () => {
   const [error, setError] = useState('');
   const [showVerification, setShowVerification] = useState(false);
   const [unverifiedEmail, setUnverifiedEmail] = useState('');
+  const [userType, setUserType] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,53 +22,23 @@ const Login = () => {
     setError('');
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setError('');
 
-    if (!formData.identifier || !formData.password) {
-      setError('Please fill in all fields');
+    if (!formData.identifier || !formData.password || !userType) {
+      setError('Please fill in all fields and select a user type');
       return;
     }
 
-    try {
-      setLoading(true);
-      const response = await fetch('http://localhost:5000/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          phone: formData.identifier, // Backend will handle if this is email or phone
-          password: formData.password,
-        }),
-      });
+    // Simulate login success
+    localStorage.setItem('token', 'dummy-token'); // Simulated token
+    localStorage.setItem('user', JSON.stringify({ userType })); // Simulated user data
 
-      const data = await response.json();
+    toast.success('Login successful!');
 
-      if (!response.ok) {
-        if (data.needsVerification) {
-          setUnverifiedEmail(data.email);
-          setShowVerification(true);
-          return;
-        }
-        throw new Error(data.error || 'Login failed');
-      }
-
-      // Save user data and token
-      localStorage.setItem('token', data.data.token);
-      localStorage.setItem('user', JSON.stringify(data.data.user));
-
-      toast.success('Login successful!');
-
-      // Redirect based on user type
-      navigate(data.data.user.userType === 'farmer' ? '/farmer-dashboard' : '/buyer-dashboard');
-    } catch (err) {
-      toast.error(err.message);
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
+    // Redirect based on user type
+    navigate(userType === 'farmer' ? '/farmer-dashboard' : '/buyer-dashboard');
   };
 
   return (
@@ -98,6 +69,11 @@ const Login = () => {
               {error}
             </div>
           )}
+
+          <div className="flex space-x-4 mb-4">
+            <button type="button" onClick={() => setUserType('farmer')} className={`btn-primary ${userType === 'farmer' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-800'}`}>I am Farmer</button>
+            <button type="button" onClick={() => setUserType('buyer')} className={`btn-primary ${userType === 'buyer' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}>I am Buyer</button>
+          </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>

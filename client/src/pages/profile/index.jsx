@@ -14,7 +14,14 @@ import {
 } from '@heroicons/react/outline';
 
 const Profile = () => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+  const [user, setUser] = useState({
+    fullName: 'Amit Sharma',
+    email: 'amit.sharma@example.com',
+    phone: '+91 9876543210',
+    address: '123 Stubble Lane, Punjab',
+    company: 'Stubble Traders',
+    role: 'buyer'
+  });
   const [activeTab, setActiveTab] = useState('profile');
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -23,10 +30,28 @@ const Profile = () => {
     email: user.email,
     phone: user.phone || '',
     address: user.address || '',
+    company: user.company || '',
     currentPassword: '',
     newPassword: '',
     confirmPassword: ''
   });
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (storedUser) {
+      setUser(storedUser);
+      setFormData({
+        fullName: storedUser.fullName,
+        email: storedUser.email,
+        phone: storedUser.phone || '+91 9876543210',
+        address: storedUser.address || '123 Stubble Lane, Punjab',
+        company: storedUser.company || 'Stubble Traders',
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: ''
+      });
+    }
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -39,18 +64,12 @@ const Profile = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await api.put('/api/users/profile', {
-        fullName: formData.fullName,
-        email: formData.email,
-        phone: formData.phone,
-        address: formData.address,
-      });
-      localStorage.setItem('user', JSON.stringify(response.data));
-      setUser(response.data);
+      // Simulate profile update
+      setUser({ ...user, ...formData });
       setIsEditing(false);
       toast.success('Profile updated successfully');
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Failed to update profile');
+      toast.error('Failed to update profile');
     } finally {
       setLoading(false);
     }
@@ -63,10 +82,7 @@ const Profile = () => {
     }
     setLoading(true);
     try {
-      await api.put('/api/users/change-password', {
-        currentPassword: formData.currentPassword,
-        newPassword: formData.newPassword,
-      });
+      // Simulate password change
       toast.success('Password updated successfully');
       setFormData({
         ...formData,
@@ -75,7 +91,7 @@ const Profile = () => {
         confirmPassword: ''
       });
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Failed to update password');
+      toast.error('Failed to change password');
     } finally {
       setLoading(false);
     }
@@ -165,7 +181,7 @@ const Profile = () => {
                     <input
                       type="email"
                       name="email"
-                      value={formData.email}
+                      value={"user@email.com"}
                       onChange={handleChange}
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
                       required
@@ -194,6 +210,17 @@ const Profile = () => {
                     />
                   </div>
 
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">Company</label>
+                    <input
+                      type="text"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleChange}
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                    />
+                  </div>
+
                   <div className="flex justify-end">
                     <button
                       type="submit"
@@ -211,7 +238,7 @@ const Profile = () => {
                       <UserIcon className="h-10 w-10 text-green-600" />
                     </div>
                     <div className="ml-6">
-                      <h3 className="text-xl font-medium text-gray-900">{user.fullName}</h3>
+                      <h3 className="text-xl font-medium text-gray-900">{'Amit Sharma'}</h3>
                       <p className="text-sm text-gray-500 capitalize">{user.role}</p>
                     </div>
                   </div>
@@ -221,7 +248,7 @@ const Profile = () => {
                       <h4 className="text-sm font-medium text-gray-500">Email</h4>
                       <p className="mt-1 flex items-center text-sm text-gray-900">
                         <MailIcon className="h-5 w-5 text-gray-400 mr-2" />
-                        {user.email}
+                        {'user@email.com'}
                       </p>
                     </div>
 
@@ -229,7 +256,7 @@ const Profile = () => {
                       <h4 className="text-sm font-medium text-gray-500">Phone</h4>
                       <p className="mt-1 flex items-center text-sm text-gray-900">
                         <PhoneIcon className="h-5 w-5 text-gray-400 mr-2" />
-                        {user.phone || 'Not provided'}
+                        {user.phone || '+91 9876543210'}
                       </p>
                     </div>
 
@@ -237,7 +264,15 @@ const Profile = () => {
                       <h4 className="text-sm font-medium text-gray-500">Address</h4>
                       <p className="mt-1 flex items-center text-sm text-gray-900">
                         <LocationMarkerIcon className="h-5 w-5 text-gray-400 mr-2" />
-                        {user.address || 'Not provided'}
+                        {user.address || '123 Stubble Lane, Punjab'}
+                      </p>
+                    </div>
+
+                    <div className="md:col-span-2">
+                      <h4 className="text-sm font-medium text-gray-500">Company</h4>
+                      <p className="mt-1 flex items-center text-sm text-gray-900">
+                        <ShieldCheckIcon className="h-5 w-5 text-gray-400 mr-2" />
+                        {user.company || 'Stubble Traders'}
                       </p>
                     </div>
                   </div>
@@ -256,7 +291,6 @@ const Profile = () => {
                     required
                   />
                 </div>
-
                 <div>
                   <label className="block text-sm font-medium text-gray-700">New Password</label>
                   <input
@@ -268,7 +302,6 @@ const Profile = () => {
                     required
                   />
                 </div>
-
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Confirm New Password</label>
                   <input
@@ -280,14 +313,13 @@ const Profile = () => {
                     required
                   />
                 </div>
-
                 <div className="flex justify-end">
                   <button
                     type="submit"
                     disabled={loading}
                     className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
                   >
-                    {loading ? 'Updating...' : 'Update Password'}
+                    {loading ? 'Changing...' : 'Change Password'}
                   </button>
                 </div>
               </form>

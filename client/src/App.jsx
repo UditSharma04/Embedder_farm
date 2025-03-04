@@ -12,12 +12,12 @@ import BuyerLayout from './components/BuyerLayout';
 import BuyerAnalytics from './pages/buyer/analytics';
 import BuyerOrders from './pages/buyer/orders';
 import BuyerTransactions from './pages/buyer/transactions';
-import BuyerPerformance from './pages/buyer/performance';
+
 import FarmerLayout from './components/FarmerLayout';
 import FarmerAnalytics from './pages/farmer/analytics';
 import FarmerOrders from './pages/farmer/orders';
 import FarmerTransactions from './pages/farmer/transactions';
-import FarmerPerformance from './pages/farmer/performance';
+
 
 const App = () => {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -29,7 +29,7 @@ const App = () => {
         <Route path="/signup" element={<PublicRoute><Signup /></PublicRoute>} />
         <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
         {user ? (
-          user.role === 'buyer' ? (
+          user.userType === 'buyer' ? (
             <Route path="/" element={<Navigate to="/buyer-dashboard" />} />
           ) : (
             <Route path="/" element={<Navigate to="/farmer-dashboard" />} />
@@ -44,7 +44,6 @@ const App = () => {
           <Route path="analytics" element={<BuyerAnalytics />} />
           <Route path="orders" element={<BuyerOrders />} />
           <Route path="transactions" element={<BuyerTransactions />} />
-          <Route path="performance" element={<BuyerPerformance />} />
         </Route>
 
         <Route path="/farmer-dashboard" element={<ProtectedRoute><FarmerLayout /></ProtectedRoute>}>
@@ -52,8 +51,12 @@ const App = () => {
           <Route path="analytics" element={<FarmerAnalytics />} />
           <Route path="orders" element={<FarmerOrders />} />
           <Route path="transactions" element={<FarmerTransactions />} />
-          <Route path="performance" element={<FarmerPerformance />} />
+         
         </Route>
+
+        {/* Redirect unauthorized access */}
+        <Route path="/buyer-dashboard/*" element={user && user.userType === 'buyer' ? <BuyerLayout /> : <Navigate to="/login" />} />
+        <Route path="/farmer-dashboard/*" element={user && user.userType === 'farmer' ? <FarmerLayout /> : <Navigate to="/login" />} />
       </Routes>
       <Toaster 
         position="top-right"

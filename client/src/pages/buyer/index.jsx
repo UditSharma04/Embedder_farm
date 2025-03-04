@@ -16,8 +16,7 @@ import {
   CheckCircleIcon,
   ClockIcon,
   TrendingUpIcon,
-  TrendingDownIcon,
-  StarIcon
+  TrendingDownIcon
 } from '@heroicons/react/outline';
 
 import dummyData from '../../dummyData.json';
@@ -159,47 +158,25 @@ const BuyerDashboard = () => {
             <table className="min-w-full divide-y divide-gray-200">
               <thead>
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-24">Order ID</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-40">Stubble Type</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-32">Quantity</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-28">Quality</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-28">Moisture</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-32">Price/Ton</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-32">Total</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-32">Status</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {metrics.recentOrders.map((order) => (
                   <tr key={order.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{order.id}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{order.id}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{order.product}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">₹{order.amount.toLocaleString()}</td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize ${
-                          (order.stubbleType?.toLowerCase() || '').includes('wheat') ? 'bg-amber-100 text-amber-800' :
-                          (order.stubbleType?.toLowerCase() || '').includes('rice') ? 'bg-green-100 text-green-800' :
-                          (order.stubbleType?.toLowerCase() || '').includes('corn') ? 'bg-yellow-100 text-yellow-800' :
-                          'bg-blue-100 text-blue-800'
-                        }`}>
-                          {order.stubbleType}
-                        </span>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{order.quantity} tons</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      <div className="flex items-center">
-                        <StarIcon className="h-4 w-4 text-yellow-400 mr-1" />
-                        <span>{order.quality}/5</span>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{order.moisture}%</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">₹{order.pricePerTon}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">₹{order.amount.toLocaleString()}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        order.status === 'Delivered' ? 'bg-green-100 text-green-800' : 
-                        order.status === 'In Transit' ? 'bg-yellow-100 text-yellow-800' : 
-                        'bg-blue-100 text-blue-800'
+                      <span className={`px-3 py-1 text-xs font-medium rounded-full ${
+                        order.status === 'Delivered' 
+                          ? 'bg-green-100 text-green-800' 
+                          : order.status === 'In Transit'
+                          ? 'bg-yellow-100 text-yellow-800'
+                          : 'bg-blue-100 text-blue-800'
                       }`}>
                         <div className="flex items-center">
                           {order.status === 'Delivered' ? (
@@ -220,58 +197,8 @@ const BuyerDashboard = () => {
           </div>
         </div>
       </div>
-      {/* Additional Stubble Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Average Quality Score</h3>
-          <div className="flex items-center justify-between">
-            <div className="text-3xl font-bold text-gray-900">{metrics.avgQualityScore || '4.2'}/5</div>
-            <StarIcon className="h-8 w-8 text-yellow-400" />
-          </div>
-          <p className="text-sm text-gray-600 mt-2">Based on recent purchases</p>
-        </div>
-
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Avg Moisture Content</h3>
-          <div className="flex items-center justify-between">
-            <div className="text-3xl font-bold text-gray-900">{metrics.avgMoisture || '12.5'}%</div>
-            <div className="text-sm text-green-600 bg-green-100 px-2 py-1 rounded-full">Optimal Range</div>
-          </div>
-          <p className="text-sm text-gray-600 mt-2">Last 30 days average</p>
-        </div>
-
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Price Trends</h3>
-          <div className="flex items-center justify-between">
-            <div className="text-3xl font-bold text-green-600">↓ 8%</div>
-            <div className="text-sm text-gray-600">vs Last Month</div>
-          </div>
-          <p className="text-sm text-gray-600 mt-2">Average price per ton</p>
-        </div>
-      </div>
-
-      {/* Seasonal Availability */}
-      <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mt-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Seasonal Availability</h2>
-        <div className="grid grid-cols-4 gap-4">
-          {['Wheat', 'Rice', 'Corn', 'Sugarcane'].map((crop) => (
-            <div key={crop} className="bg-gray-50 p-4 rounded-lg">
-              <h4 className="font-medium text-gray-900">{crop} Stubble</h4>
-              <div className="flex items-center mt-2">
-                <div className="w-full bg-gray-200 rounded-full h-2.5">
-                  <div 
-                    className="bg-green-600 h-2.5 rounded-full" 
-                    style={{ width: `${Math.random() * 100}%` }}
-                  ></div>
-                </div>
-                <span className="ml-2 text-sm text-gray-600">Available</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   );
 };
 
-export default BuyerDashboard;
+export default BuyerDashboard; 
